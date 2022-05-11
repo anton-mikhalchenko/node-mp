@@ -3,8 +3,18 @@
   "version": "1.0.0",
   "description": "Node mentoring program",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "babel files-task.js -d dist",
+    "task3": "npm run build && node dist/files-task.js",
+    "task3-1": "npm run build && node dist/files-task.js --streams"
   },
   "author": "Anton Mikhalchenko",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.17.10",
+    "@babel/core": "^7.17.10",
+    "@babel/preset-env": "^7.17.10"
+  },
+  "dependencies": {
+    "csvtojson": "^2.0.10"
+  }
 }
