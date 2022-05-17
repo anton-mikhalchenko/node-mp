@@ -2,8 +2,8 @@ import { createReadStream, createWriteStream, promises as fsPromises } from 'fs'
 import csv from 'csvtojson';
 
 if (process.argv[2] === '--streams') {
-    const readableStream = createReadStream('./csv/books.csv');
-    const writableStream = createWriteStream('./txt/books.txt');
+    const readableStream = fs.createReadStream('./csv/books.csv');
+    const writableStream = fs.createWriteStream('./txt/books.txt');
 
     readableStream.pipe(csv())
         .pipe(writableStream)

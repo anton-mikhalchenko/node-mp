@@ -3,9 +3,12 @@
   "version": "1.0.0",
   "description": "Node mentoring program",
   "scripts": {
-    "build": "babel files-task.js -d dist",
+    "task1": "node reverse.js"
+    "task2": "node files-task.js",
+    "task2-1": "node files-task.js --streams"
     "task3": "npm run build && node dist/files-task.js",
-    "task3-1": "npm run build && node dist/files-task.js --streams"
+    "task3-1": "npm run build && node dist/files-task.js --streams",
+    "build": "babel files-task.js -d dist"
   },
   "author": "Anton Mikhalchenko",
   "license": "ISC",
