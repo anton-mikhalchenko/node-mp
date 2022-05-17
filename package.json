@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Node mentoring program",
   "scripts": {
+    "task1": "node reverse.js"
     "task2": "node files-task.js",
     "task2-1": "node files-task.js --streams"
   },
