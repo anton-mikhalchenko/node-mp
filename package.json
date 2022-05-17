@@ -4,7 +4,12 @@
   "description": "Node mentoring program",
   "scripts": {
     "task1": "node reverse.js"
+    "task2": "node files-task.js",
+    "task2-1": "node files-task.js --streams"
   },
   "author": "Anton Mikhalchenko",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "csvtojson": "^2.0.10"
+  }
 }
