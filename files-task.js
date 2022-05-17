@@ -1,5 +1,5 @@
-const fs = require('fs');
-const csv = require('csvtojson');
+import { createReadStream, createWriteStream, promises as fsPromises } from 'fs';
+import csv from 'csvtojson';
 
 if (process.argv[2] === '--streams') {
     const readableStream = fs.createReadStream('./csv/books.csv');
@@ -9,8 +9,6 @@ if (process.argv[2] === '--streams') {
         .pipe(writableStream)
         .on('error', () => console.error(error.message));
 } else {
-    const fsPromises = fs.promises;
-
     csv().fromFile('./csv/books.csv')
         .then(jsonObj => {
             const convertedData = jsonObj.map(obj => ({
