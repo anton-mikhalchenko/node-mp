@@ -1,13 +1,17 @@
 import { User } from "../models/user.model";
 
 export default class UsersService {
-    private _users: Array<User> = [];y
+    private _users: Array<User> = [];
+    private _userIdCounter = 0;
 
     get users(): Array<User> {
         return this._users;
     }
 
     addUser(user: User): void {
+        ++this._userIdCounter;
+        user.id = this._userIdCounter.toString();
+        user.isDeleted = false;
         this._users.push(user);
     }
 
@@ -19,11 +23,11 @@ export default class UsersService {
         }
     }
 
-    getUsersList(login: string, limit: number): Array<User> {
+    getUsersList(login = 'a', limit = 5): Array<User> {
         const result: Array<User> = [];
 
         for (let user of this._users) {
-            if (limit &&result.length === limit) {
+            if (limit && result.length === limit) {
                 break;
             }
     

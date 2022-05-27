@@ -12,22 +12,43 @@ usersRouter.get('/list', (req: Request, res: Response) => {
 });
 
 usersRouter.get('/:id', (req: Request, res: Response) => {
-    res.status(200).json(usersService.getUserById(req.params.id));
+    const foundUser = usersService.getUserById(req.params.id);
+    if (foundUser) {
+        res.status(200).json(foundUser);
+    } else {
+        res.status(404).json({ err: `User with id ${req.params.id} not found` });
+    }
 });
 
-usersRouter.post('/create', validateReqBody(), (req: Request, res: Response) => {
+usersRouter.post('/', validateReqBody(), (req: Request, res: Response, next) => {
     const user: User = req.body;
     usersService.addUser(user);
-    res.status(200).json({ id: user.id });
+    res.status(201).json({ id: user.id });
 });
 
-usersRouter.put('/:id', validateReqBody(), (req: Request, res: Response) => {
+usersRouter.patch('/:id', validateReqBody(), (req: Request, res: Response) => {
     res.status(200).json(usersService.updateUser(req.params.id, req.body));
 });
 
 usersRouter.delete('/:id', (req: Request, res: Response) => {
-    res.status(200).json(usersService.softDeleteUser(req.params.id));
+    const deletedUser = usersService.softDeleteUser(req.params.id);
+    if (deletedUser) {
+        res.status(200).json(deletedUser);
+    } else {
+        res.status(404).json({ err: `User with id ${req.params.id} not found` });
+    }
 });
+
+usersRouter.use((err, req, res, next) => {
+    if (err && err.error && err.error.isJoi) {
+        res.status(400).json({
+            type: err.type,
+            message: err.error.toString()
+          });
+    } else {
+        next(err);
+    }
+  });
 
 
 export default usersRouter;

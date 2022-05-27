@@ -23,7 +23,7 @@ export default class UsersService {
         }
     }
 
-    getUsersList(login: string, limit: number): Array<User> {
+    getUsersList(login = 'a', limit = 5): Array<User> {
         const result: Array<User> = [];
 
         for (let user of this._users) {
