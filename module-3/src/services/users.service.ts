@@ -1,12 +1,12 @@
 import User from "../models/User.model";
 import UsersRepository from "../data-access/users.repository";
-import { SavedRecordRes } from "../utils/SavedRecordRes";
+import { SavedRecordRes } from "../common/types/SavedRecordRes";
 
 export default class UsersService {
-    private _users: Array<User> = [];
     private _usersRepository = new UsersRepository();
 
     saveUser(user: User): Promise<SavedRecordRes> {
+        user.isDeleted = false;
         return this._usersRepository.saveUser(user);
     }
 
@@ -14,7 +14,10 @@ export default class UsersService {
         return this._usersRepository.getUserById(id);
     }
 
-    getUsersList(login = 'a', limit = 5): Promise<Array<User>> {
+    getUsersList(login: string, limit: number): Promise<Array<User>> {
+        login = login || 'a';
+        limit = limit || 5;
+
         return this._usersRepository.getUsersList(login, limit);
     }
 

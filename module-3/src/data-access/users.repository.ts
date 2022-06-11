@@ -1,6 +1,6 @@
 import { Like, Repository } from 'typeorm';
 import User from '../models/User.model';
-import { SavedRecordRes } from '../utils/SavedRecordRes';
+import { SavedRecordRes } from '../common/types/SavedRecordRes';
 import { AppDataSource } from './data-source';
 
 
